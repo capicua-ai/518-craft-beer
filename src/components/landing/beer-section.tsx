@@ -94,21 +94,19 @@ export function BeerSection({ beer, flip, eventLabel }: BeerSectionProps) {
             </div>
           )}
 
-          <AnimateIn>
-            {beer.label_image_url ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={beer.label_image_url}
-                alt={`${beer.name} can`}
-                className="relative z-10 w-auto max-w-[320px] md:max-w-none md:max-h-[72vh]"
-                style={{
-                  filter: `drop-shadow(0 30px 80px ${beer.accent_color}55) drop-shadow(0 0 30px ${beer.accent_color}30)`,
-                }}
-              />
-            ) : (
-              <CanPlaceholder beer={beer} />
-            )}
-          </AnimateIn>
+          {beer.label_image_url ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={beer.label_image_url}
+              alt={`${beer.name} can`}
+              className="relative z-10 w-auto max-w-[320px] md:max-w-none md:max-h-[72vh]"
+              style={{
+                filter: `drop-shadow(0 30px 80px ${beer.accent_color}55) drop-shadow(0 0 30px ${beer.accent_color}30)`,
+              }}
+            />
+          ) : (
+            <CanPlaceholder beer={beer} />
+          )}
         </div>
 
         {/* ── Text stack ─────────────────────────────────────────── */}
@@ -117,7 +115,14 @@ export function BeerSection({ beer, flip, eventLabel }: BeerSectionProps) {
             flip ? "md:items-end md:text-right" : ""
           }`}
         >
-          <AnimateIn delay={200} className="w-full">
+          <AnimateIn
+            delay={200}
+            className={
+              flip
+                ? "w-full md:flex md:flex-col md:items-end"
+                : "w-full"
+            }
+          >
             {/* Style / specs */}
             <p
               className="text-[11px] tracking-[0.4em] uppercase mb-6"
