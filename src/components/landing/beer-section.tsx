@@ -1,3 +1,5 @@
+import { AnimateIn } from "@/components/ui/animate-in";
+
 interface BeerData {
   id: string;
   name: string;
@@ -32,8 +34,9 @@ export function BeerSection({ beer, flip, eventLabel }: BeerSectionProps) {
         style={{
           inset: 0,
           background: flip
-            ? `radial-gradient(ellipse 60% 70% at 25% 50%, ${beer.accent_color}18 0%, transparent 70%)`
-            : `radial-gradient(ellipse 60% 70% at 75% 50%, ${beer.accent_color}18 0%, transparent 70%)`,
+            ? `radial-gradient(ellipse 60% 70% at 25% 50%, ${beer.accent_color}22 0%, transparent 70%)`
+            : `radial-gradient(ellipse 60% 70% at 75% 50%, ${beer.accent_color}22 0%, transparent 70%)`,
+          animation: "craft-glow-breathe 4s ease-in-out infinite",
         }}
         aria-hidden="true"
       />
@@ -53,7 +56,7 @@ export function BeerSection({ beer, flip, eventLabel }: BeerSectionProps) {
         }`}
       >
         {/* ── Can image ──────────────────────────────────────────── */}
-        <div className="flex-1 relative flex items-center justify-center py-16 px-8 md:py-24 md:px-12 lg:px-16">
+        <div className="flex-1 relative flex items-center justify-center py-10 px-8 md:py-24 md:px-12 lg:px-16">
 
           {/* Ghost style word */}
           <span
@@ -91,19 +94,21 @@ export function BeerSection({ beer, flip, eventLabel }: BeerSectionProps) {
             </div>
           )}
 
-          {beer.label_image_url ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={beer.label_image_url}
-              alt={`${beer.name} can`}
-              className="relative z-10 w-auto max-w-[320px] md:max-w-none md:max-h-[72vh]"
-              style={{
-                filter: `drop-shadow(0 30px 80px ${beer.accent_color}55) drop-shadow(0 0 30px ${beer.accent_color}30)`,
-              }}
-            />
-          ) : (
-            <CanPlaceholder beer={beer} />
-          )}
+          <AnimateIn>
+            {beer.label_image_url ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={beer.label_image_url}
+                alt={`${beer.name} can`}
+                className="relative z-10 w-auto max-w-[320px] md:max-w-none md:max-h-[72vh]"
+                style={{
+                  filter: `drop-shadow(0 30px 80px ${beer.accent_color}55) drop-shadow(0 0 30px ${beer.accent_color}30)`,
+                }}
+              />
+            ) : (
+              <CanPlaceholder beer={beer} />
+            )}
+          </AnimateIn>
         </div>
 
         {/* ── Text stack ─────────────────────────────────────────── */}
@@ -112,61 +117,63 @@ export function BeerSection({ beer, flip, eventLabel }: BeerSectionProps) {
             flip ? "md:items-end md:text-right" : ""
           }`}
         >
-          {/* Style / specs */}
-          <p
-            className="text-[11px] tracking-[0.4em] uppercase mb-6"
-            style={{ color: beer.accent_color }}
-          >
-            {beer.style} &middot; {beer.abv} ABV &middot; {beer.size_oz} FL OZ
-          </p>
+          <AnimateIn delay={200} className="w-full">
+            {/* Style / specs */}
+            <p
+              className="text-[11px] tracking-[0.4em] uppercase mb-6"
+              style={{ color: beer.accent_color }}
+            >
+              {beer.style} &middot; {beer.abv} ABV &middot; {beer.size_oz} FL OZ
+            </p>
 
-          {/* Beer name */}
-          <h2
-            className="font-display uppercase leading-none text-white mb-6"
-            style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
-          >
-            {beer.name}
-          </h2>
+            {/* Beer name */}
+            <h2
+              className="font-display uppercase leading-none text-white mb-6"
+              style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
+            >
+              {beer.name}
+            </h2>
 
-          {/* Thin rule */}
-          <div
-            className="h-px mb-8"
-            style={{
-              width: "3rem",
-              background: beer.accent_color,
-              opacity: 0.45,
-              marginLeft: flip ? "auto" : undefined,
-            }}
-          />
-
-          {/* Description */}
-          <p
-            className="font-editorial italic text-base md:text-lg leading-relaxed max-w-md"
-            style={{ color: "rgba(245,229,192,0.62)" }}
-          >
-            {beer.description}
-          </p>
-
-          {/* Badges */}
-          <div
-            className={`mt-10 flex flex-wrap items-center gap-4 ${flip ? "md:justify-end" : ""}`}
-          >
-            <span
-              className="text-[10px] tracking-[0.3em] uppercase border px-3 py-1.5"
+            {/* Thin rule */}
+            <div
+              className="h-px mb-8"
               style={{
-                borderColor: `${beer.accent_color}45`,
-                color: `${beer.accent_color}85`,
+                width: "3rem",
+                background: beer.accent_color,
+                opacity: 0.45,
+                marginLeft: flip ? "auto" : undefined,
               }}
+            />
+
+            {/* Description */}
+            <p
+              className="font-editorial italic text-base md:text-lg leading-relaxed max-w-md"
+              style={{ color: "rgba(245,229,192,0.62)" }}
             >
-              Independent Craft
-            </span>
-            <span
-              className="text-[10px] tracking-[0.3em] uppercase"
-              style={{ color: "rgba(245,229,192,0.2)" }}
+              {beer.description}
+            </p>
+
+            {/* Badges */}
+            <div
+              className={`mt-10 flex flex-wrap items-center gap-4 ${flip ? "md:justify-end" : ""}`}
             >
-              Think NY &middot; Drink NY
-            </span>
-          </div>
+              <span
+                className="text-[10px] tracking-[0.3em] uppercase border px-3 py-1.5"
+                style={{
+                  borderColor: `${beer.accent_color}45`,
+                  color: `${beer.accent_color}85`,
+                }}
+              >
+                Independent Craft
+              </span>
+              <span
+                className="text-[10px] tracking-[0.3em] uppercase"
+                style={{ color: "rgba(245,229,192,0.2)" }}
+              >
+                Think NY &middot; Drink NY
+              </span>
+            </div>
+          </AnimateIn>
         </div>
       </div>
     </section>

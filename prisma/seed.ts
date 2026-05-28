@@ -16,12 +16,15 @@ async function main() {
       id: "00000000-0000-0000-0000-000000000001",
       hero_headline: "TWO NEW BEERS",
       hero_subheadline:
-        "Fresh from Troy, NY. Brewed with community in every can.",
+        "Every drink tells a story. An alliance of artists dedicated to the Trojan Renaissance.",
       footer_address: "200 Broadway, Troy, NY",
       footer_website: "518craft.com",
       footer_instagram: "@518craft",
     },
-    update: {},
+    update: {
+      hero_subheadline:
+        "Every drink tells a story. An alliance of artists dedicated to the Trojan Renaissance.",
+    },
   });
 
   // Beer 1 — Farmers Market After Party
