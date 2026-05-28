@@ -18,26 +18,54 @@ interface BeerSectionProps {
 export function BeerSection({ beer, flip }: BeerSectionProps) {
   return (
     <section
-      className="min-h-screen flex items-center px-6 md:px-12 lg:px-20 py-24"
+      className="relative min-h-screen flex items-stretch overflow-hidden"
       style={{
-        background: `linear-gradient(160deg, ${beer.bg_color} 0%, #0A0500 100%)`,
+        background: `linear-gradient(155deg, ${beer.bg_color} 0%, #050200 60%)`,
       }}
     >
+      {/* Ambient glow behind can */}
       <div
-        className={`w-full max-w-5xl mx-auto flex flex-col gap-16 md:gap-20 items-center ${
-          flip ? "md:flex-row-reverse" : "md:flex-row"
+        className="absolute pointer-events-none"
+        style={{
+          inset: 0,
+          background: flip
+            ? `radial-gradient(ellipse 60% 70% at 25% 50%, ${beer.accent_color}18 0%, transparent 70%)`
+            : `radial-gradient(ellipse 60% 70% at 75% 50%, ${beer.accent_color}18 0%, transparent 70%)`,
+        }}
+        aria-hidden="true"
+      />
+
+      <div
+        className={`relative z-10 w-full flex flex-col md:flex-row items-center ${
+          flip ? "md:flex-row-reverse" : ""
         }`}
       >
-        {/* Label art */}
-        <div className="flex-shrink-0 flex justify-center">
-          <LabelArt beer={beer} />
+        {/* ── Can image ──────────────────────────────────────────── */}
+        <div className="flex-1 flex items-center justify-center py-16 px-8 md:py-24 md:px-12 lg:px-16">
+          {beer.label_image_url ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={beer.label_image_url}
+              alt={`${beer.name} can`}
+              className="relative w-auto max-w-[320px] md:max-w-none md:max-h-[72vh]"
+              style={{
+                filter: `drop-shadow(0 30px 80px ${beer.accent_color}55) drop-shadow(0 0 30px ${beer.accent_color}30)`,
+              }}
+            />
+          ) : (
+            <CanPlaceholder beer={beer} />
+          )}
         </div>
 
-        {/* Text */}
-        <div className="flex-1 min-w-0">
-          {/* Style / specs badge */}
+        {/* ── Text stack ─────────────────────────────────────────── */}
+        <div
+          className={`flex-1 flex flex-col justify-center px-8 pb-20 md:pb-0 md:px-12 lg:px-16 xl:px-20 ${
+            flip ? "md:items-end md:text-right" : ""
+          }`}
+        >
+          {/* Style / specs */}
           <p
-            className="text-xs tracking-[0.35em] uppercase mb-5"
+            className="text-[11px] tracking-[0.4em] uppercase mb-6"
             style={{ color: beer.accent_color }}
           >
             {beer.style} &middot; {beer.abv} ABV &middot; {beer.size_oz} FL OZ
@@ -45,27 +73,40 @@ export function BeerSection({ beer, flip }: BeerSectionProps) {
 
           {/* Beer name */}
           <h2
-            className="font-display uppercase leading-none mb-8 text-white"
-            style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)" }}
+            className="font-display uppercase leading-none text-white mb-6"
+            style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
           >
             {beer.name}
           </h2>
 
+          {/* Thin rule */}
+          <div
+            className="h-px mb-8"
+            style={{
+              width: "3rem",
+              background: beer.accent_color,
+              opacity: 0.45,
+              marginLeft: flip ? "auto" : undefined,
+            }}
+          />
+
           {/* Description */}
           <p
             className="text-base md:text-lg leading-relaxed max-w-md"
-            style={{ color: "rgba(245,229,192,0.6)" }}
+            style={{ color: "rgba(245,229,192,0.62)" }}
           >
             {beer.description}
           </p>
 
           {/* Badges */}
-          <div className="mt-10 flex flex-wrap items-center gap-4">
+          <div
+            className={`mt-10 flex flex-wrap items-center gap-4 ${flip ? "md:justify-end" : ""}`}
+          >
             <span
               className="text-[10px] tracking-[0.3em] uppercase border px-3 py-1.5"
               style={{
-                borderColor: `${beer.accent_color}50`,
-                color: `${beer.accent_color}90`,
+                borderColor: `${beer.accent_color}45`,
+                color: `${beer.accent_color}85`,
               }}
             >
               Independent Craft
@@ -83,31 +124,8 @@ export function BeerSection({ beer, flip }: BeerSectionProps) {
   );
 }
 
-function LabelArt({ beer }: { beer: BeerData }) {
-  const size = 320;
-
-  if (beer.label_image_url) {
-    return (
-      <div
-        className="relative overflow-hidden"
-        style={{
-          width: size,
-          height: size,
-          borderRadius: "50%",
-          border: `2px solid ${beer.accent_color}30`,
-          boxShadow: `0 0 80px ${beer.accent_color}15, 0 0 160px ${beer.accent_color}08`,
-        }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={beer.label_image_url}
-          alt={`${beer.name} label`}
-          className="w-full h-full object-cover"
-        />
-      </div>
-    );
-  }
-
+function CanPlaceholder({ beer }: { beer: BeerData }) {
+  const size = 300;
   return (
     <div
       className="relative flex flex-col items-center justify-center text-center"
@@ -115,54 +133,30 @@ function LabelArt({ beer }: { beer: BeerData }) {
         width: size,
         height: size,
         borderRadius: "50%",
-        background: `radial-gradient(circle at 40% 35%, ${beer.bg_color}FF 0%, #050200 100%)`,
+        background: `radial-gradient(circle at 40% 35%, ${beer.bg_color} 0%, #050200 100%)`,
         border: `2px solid ${beer.accent_color}25`,
-        boxShadow: `0 0 80px ${beer.accent_color}12, 0 0 160px ${beer.accent_color}06`,
+        boxShadow: `0 0 80px ${beer.accent_color}18, 0 0 160px ${beer.accent_color}08`,
       }}
     >
-      {/* Decorative ring */}
       <div
         className="absolute"
-        style={{
-          inset: 14,
-          borderRadius: "50%",
-          border: `1px solid ${beer.accent_color}15`,
-        }}
+        style={{ inset: 14, borderRadius: "50%", border: `1px solid ${beer.accent_color}15` }}
       />
-      <div
-        className="absolute"
-        style={{
-          inset: 28,
-          borderRadius: "50%",
-          border: `1px dashed ${beer.accent_color}10`,
-        }}
-      />
-
-      {/* Content */}
-      <p
-        className="font-display text-6xl leading-none"
-        style={{ color: beer.accent_color }}
-      >
+      <p className="font-display text-5xl leading-none" style={{ color: beer.accent_color }}>
         518
       </p>
       <p
-        className="font-display text-sm tracking-[0.45em] uppercase mt-1 mb-5"
-        style={{ color: "rgba(245,229,192,0.35)" }}
+        className="font-display text-xs tracking-[0.45em] uppercase mt-1 mb-4"
+        style={{ color: "rgba(245,229,192,0.3)" }}
       >
         CRAFT
       </p>
-
-      <div className="px-8">
-        <p
-          className="font-display text-xl uppercase leading-tight text-white tracking-wide"
-        >
-          {beer.name}
-        </p>
-      </div>
-
+      <p className="font-display text-lg uppercase leading-tight text-white tracking-wide px-8">
+        {beer.name}
+      </p>
       <p
-        className="font-display text-xs tracking-[0.35em] uppercase mt-3"
-        style={{ color: `${beer.accent_color}70` }}
+        className="font-display text-[10px] tracking-[0.35em] uppercase mt-2"
+        style={{ color: `${beer.accent_color}65` }}
       >
         {beer.style}
       </p>

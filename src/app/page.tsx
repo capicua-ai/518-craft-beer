@@ -44,61 +44,73 @@ export default async function Home() {
 
       <main>
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
-        <section
-          className="relative flex flex-col items-center justify-center min-h-screen px-6 text-center overflow-hidden"
-          style={{
-            background:
-              "radial-gradient(ellipse at 50% 0%, #1C0A0020 0%, var(--craft-bg) 70%)",
-          }}
-        >
-          {/* Subtle top glow */}
+        <section className="relative min-h-screen overflow-hidden">
+          {/* Full-bleed background photo */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/hero-v4.png"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+          />
+
+          {/* Gradient overlays — heavy left/bottom for text legibility */}
           <div
-            className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[1px] pointer-events-none"
+            className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to right, transparent, var(--craft-amber), transparent)",
-              opacity: 0.3,
+                "linear-gradient(to right, rgba(5,2,0,0.92) 0%, rgba(5,2,0,0.65) 45%, rgba(5,2,0,0.15) 100%)",
             }}
-            aria-hidden="true"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to top, rgba(5,2,0,0.85) 0%, transparent 50%)",
+            }}
           />
 
-          {/* 518 Craft badge */}
-          <div className="mb-8 flex flex-col items-center gap-1">
-            <span
-              className="font-display text-xs tracking-[0.6em] uppercase"
-              style={{ color: "var(--craft-amber)" }}
-            >
-              518 &nbsp; CRAFT
-            </span>
+          {/* Logo — top left */}
+          <div className="absolute top-8 left-8 md:top-10 md:left-12 lg:left-16">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/518logo.svg"
+              alt="518 Craft"
+              className="h-9 md:h-11 w-auto"
+            />
           </div>
 
-          {/* Main headline */}
-          <h1
-            className="font-display uppercase leading-none text-white mb-5"
-            style={{ fontSize: "clamp(4.5rem,16vw,14rem)" }}
-          >
-            {s.hero_headline}
-          </h1>
+          {/* Headline — bottom left */}
+          <div className="absolute bottom-14 left-8 md:left-12 lg:left-16 max-w-2xl">
+            <p
+              className="font-display text-[10px] tracking-[0.55em] uppercase mb-5"
+              style={{ color: "var(--craft-amber)" }}
+            >
+              518 &nbsp; CRAFT &nbsp;&middot;&nbsp; TROY, NY
+            </p>
+            <h1
+              className="font-display uppercase leading-none text-white"
+              style={{ fontSize: "clamp(3.5rem, 10vw, 9rem)" }}
+            >
+              {s.hero_headline}
+            </h1>
+            <div
+              className="w-14 h-px my-5"
+              style={{ background: "var(--craft-amber)", opacity: 0.55 }}
+            />
+            <p
+              className="text-sm md:text-base leading-relaxed max-w-sm"
+              style={{ color: "rgba(245,229,192,0.55)" }}
+            >
+              {s.hero_subheadline}
+            </p>
+          </div>
 
-          {/* Divider */}
-          <div
-            className="w-16 h-px mb-6"
-            style={{ background: "var(--craft-amber)", opacity: 0.5 }}
-          />
-
-          {/* Subheadline */}
-          <p
-            className="text-base md:text-lg max-w-xs md:max-w-sm leading-relaxed"
-            style={{ color: "rgba(245,229,192,0.5)" }}
-          >
-            {s.hero_subheadline}
-          </p>
-
-          {/* Scroll hint */}
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2.5">
+          {/* Scroll hint — bottom right */}
+          <div className="absolute bottom-10 right-8 md:right-12 flex flex-col items-center gap-2.5">
             <span
               className="text-[10px] tracking-[0.4em] uppercase"
-              style={{ color: "rgba(245,229,192,0.25)" }}
+              style={{ color: "rgba(245,229,192,0.3)" }}
             >
               Scroll
             </span>
@@ -106,7 +118,7 @@ export default async function Home() {
               className="w-px h-10"
               style={{
                 background:
-                  "linear-gradient(to bottom, rgba(245,229,192,0.25), transparent)",
+                  "linear-gradient(to bottom, rgba(245,229,192,0.3), transparent)",
               }}
             />
           </div>
