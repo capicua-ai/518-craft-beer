@@ -112,7 +112,7 @@ export default async function Home() {
               className="text-[10px] tracking-[0.4em] uppercase"
               style={{ color: "rgba(245,229,192,0.3)" }}
             >
-              Scroll
+              TONIGHT
             </span>
             <div
               className="w-px h-10"
@@ -126,7 +126,12 @@ export default async function Home() {
 
         {/* ── Beer sections ─────────────────────────────────────────────────── */}
         {beers.map((beer, i) => (
-          <BeerSection key={beer.id} beer={beer} flip={i % 2 !== 0} />
+          <BeerSection
+            key={beer.id}
+            beer={beer}
+            flip={i % 2 !== 0}
+            eventLabel={i === 0 ? "EVERY SAT · 9AM TO 2PM" : "EVERY FINAL FRIDAY"}
+          />
         ))}
 
         {/* ── Footer ───────────────────────────────────────────────────────── */}

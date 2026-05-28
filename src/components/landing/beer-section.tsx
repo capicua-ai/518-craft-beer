@@ -13,9 +13,12 @@ interface BeerData {
 interface BeerSectionProps {
   beer: BeerData;
   flip: boolean;
+  eventLabel?: string;
 }
 
-export function BeerSection({ beer, flip }: BeerSectionProps) {
+export function BeerSection({ beer, flip, eventLabel }: BeerSectionProps) {
+  const ghostWord = beer.style.split(" ").pop() ?? beer.style;
+
   return (
     <section
       className="relative min-h-screen flex items-stretch overflow-hidden"
@@ -35,19 +38,65 @@ export function BeerSection({ beer, flip }: BeerSectionProps) {
         aria-hidden="true"
       />
 
+      {/* Vertical amber accent line — left edge */}
+      <div
+        className="absolute left-0 top-0 h-full w-px pointer-events-none"
+        style={{
+          background: `linear-gradient(to bottom, transparent 0%, ${beer.accent_color}55 30%, ${beer.accent_color}55 70%, transparent 100%)`,
+        }}
+        aria-hidden="true"
+      />
+
       <div
         className={`relative z-10 w-full flex flex-col md:flex-row items-center ${
           flip ? "md:flex-row-reverse" : ""
         }`}
       >
         {/* ── Can image ──────────────────────────────────────────── */}
-        <div className="flex-1 flex items-center justify-center py-16 px-8 md:py-24 md:px-12 lg:px-16">
+        <div className="flex-1 relative flex items-center justify-center py-16 px-8 md:py-24 md:px-12 lg:px-16">
+
+          {/* Ghost style word */}
+          <span
+            aria-hidden="true"
+            className="absolute font-display uppercase select-none pointer-events-none"
+            style={{
+              fontSize: "clamp(160px, 28vw, 420px)",
+              color: beer.accent_color,
+              opacity: 0.07,
+              lineHeight: 1,
+              letterSpacing: "-0.02em",
+              zIndex: 0,
+            }}
+          >
+            {ghostWord}
+          </span>
+
+          {/* Rotated event label */}
+          {eventLabel && (
+            <div
+              className={`absolute ${flip ? "right-3 md:right-5" : "left-3 md:left-5"} top-0 bottom-0 hidden md:flex items-center pointer-events-none select-none`}
+              aria-hidden="true"
+            >
+              <span
+                className="font-display text-[9px] tracking-[0.45em] uppercase"
+                style={{
+                  color: beer.accent_color,
+                  opacity: 0.45,
+                  writingMode: "vertical-rl",
+                  transform: "rotate(180deg)",
+                }}
+              >
+                {eventLabel}
+              </span>
+            </div>
+          )}
+
           {beer.label_image_url ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={beer.label_image_url}
               alt={`${beer.name} can`}
-              className="relative w-auto max-w-[320px] md:max-w-none md:max-h-[72vh]"
+              className="relative z-10 w-auto max-w-[320px] md:max-w-none md:max-h-[72vh]"
               style={{
                 filter: `drop-shadow(0 30px 80px ${beer.accent_color}55) drop-shadow(0 0 30px ${beer.accent_color}30)`,
               }}
