@@ -1,5 +1,6 @@
 import { AgeGate } from "@/components/landing/age-gate";
 import { BeerSection } from "@/components/landing/beer-section";
+import { FindSection } from "@/components/landing/find-section";
 import { db } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
@@ -133,6 +134,9 @@ export default async function Home() {
             eventLabel={i === 0 ? "EVERY SAT · 9AM TO 2PM" : "EVERY FINAL FRIDAY"}
           />
         ))}
+
+        {/* ── Find Our Beer ─────────────────────────────────────────────────── */}
+        <FindSection />
 
         {/* ── Footer ───────────────────────────────────────────────────────── */}
         <footer
