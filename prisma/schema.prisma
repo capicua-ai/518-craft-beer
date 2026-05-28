@@ -22,3 +22,33 @@ datasource db {
 }
 
 // Define your models below this line.
+
+model SiteSettings {
+  id               String   @id @default(uuid())
+  hero_headline    String
+  hero_subheadline String
+  footer_address   String
+  footer_website   String
+  footer_instagram String
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+
+  @@map("site_settings")
+}
+
+model Beer {
+  id              String   @id @default(uuid())
+  name            String
+  style           String
+  abv             String
+  size_oz         Int      @default(12)
+  description     String
+  label_image_url String?
+  accent_color    String   @default("#C97D1A")
+  bg_color        String   @default("#1A0800")
+  display_order   Int      @default(0)
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  @@map("beers")
+}
