@@ -92,7 +92,7 @@ export function BeerSection({ beer, flip }: BeerSectionProps) {
 
           {/* Description */}
           <p
-            className="text-base md:text-lg leading-relaxed max-w-md"
+            className="font-editorial italic text-base md:text-lg leading-relaxed max-w-md"
             style={{ color: "rgba(245,229,192,0.62)" }}
           >
             {beer.description}

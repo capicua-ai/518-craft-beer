@@ -20,6 +20,7 @@
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
   --font-display: var(--font-display);
+  --font-editorial: var(--font-lora);
   --color-craft-bg: var(--craft-bg);
   --color-craft-cream: var(--craft-cream);
   --color-craft-amber: var(--craft-amber);
@@ -85,7 +86,7 @@
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
+  --radius: 0.25rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -157,6 +158,20 @@
   --craft-cream:  #F5E5C0;
   --craft-amber:  #C97D1A;
   --craft-gold:   #E09A1A;
+}
+
+/* ── Editorial direction tokens ────────────────────────────────────────────
+   Applied globally for the 518 Craft Beer Editorial/Magazine direction.     */
+@layer tokens {
+  :root {
+    --direction-radius: 0;
+    --direction-border-rule: 1px solid var(--craft-amber);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--craft-amber);
+    outline-offset: 4px;
+  }
 }
 
 /* ── Blueprint utility classes ─────────────────────────────────────────────
