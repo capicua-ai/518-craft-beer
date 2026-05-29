@@ -34,7 +34,7 @@ export function StorySection({ id }: { id?: string }) {
         {/* Header */}
         <AnimateIn className="mb-16 md:mb-20">
           <p
-            className="text-sm tracking-[0.55em] uppercase mb-4"
+            className="text-sm tracking-[0.35em] uppercase mb-4"
             style={{ color: "rgba(201,125,26,1)" }}
           >
             Downtown Troy, NY &nbsp;&middot;&nbsp; The Trojan Renaissance

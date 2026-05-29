@@ -201,7 +201,7 @@ export default async function Home() {
           </div>
 
           {/* Three-column grid */}
-          <div className="px-8 md:px-16 lg:px-24 py-14 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
+          <div className="px-8 md:px-16 lg:px-24 py-14 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-8">
             {/* Visit */}
             <div>
               <p
@@ -269,7 +269,7 @@ export default async function Home() {
             </div>
 
             {/* Connect */}
-            <div>
+            <div className="md:col-span-2 lg:col-span-1">
               <p
                 className="text-xs tracking-[0.55em] uppercase pb-4 mb-6"
                 style={{

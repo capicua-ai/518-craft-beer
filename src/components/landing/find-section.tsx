@@ -136,7 +136,7 @@ export function FindSection({ id }: { id?: string }) {
           style={{ borderTop: "1px solid rgba(245,229,192,0.05)" }}
         >
           <p
-            className="text-xs tracking-[0.35em] uppercase"
+            className="hidden lg:block text-xs tracking-[0.35em] uppercase"
             aria-hidden="true"
             style={{ color: "rgba(245,229,192,0.30)" }}
           >

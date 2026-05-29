@@ -76,8 +76,8 @@ export function Navbar() {
           href="#visit"
           className="md:hidden text-xs tracking-[0.3em] uppercase font-semibold px-3 py-2"
           style={{
-            border: "1px solid var(--craft-amber)",
-            color: "var(--craft-amber)",
+            background: "var(--craft-amber)",
+            color: "#0A0500",
             textDecoration: "none",
           }}
           aria-label="Visit 518 Craft at 200 Broadway"
