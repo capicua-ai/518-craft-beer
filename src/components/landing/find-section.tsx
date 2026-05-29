@@ -39,7 +39,7 @@ export function FindSection({ id }: { id?: string }) {
           </p>
           <h2
             className="font-display uppercase leading-none text-white"
-            style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}
+            style={{ fontSize: "clamp(2.5rem, 5.5vw, 4.5rem)" }}
           >
             Visit{" "}
             <span style={{ color: "var(--craft-cream)" }}>Us</span>

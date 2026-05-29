@@ -41,7 +41,7 @@ export function StorySection({ id }: { id?: string }) {
           </p>
           <h2
             className="font-display uppercase leading-none"
-            style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}
+            style={{ fontSize: "clamp(2.5rem, 5.5vw, 4.5rem)" }}
           >
             <span className="text-white block">A Corner</span>
             <span style={{ color: "var(--craft-cream)" }}>Clubhouse</span>

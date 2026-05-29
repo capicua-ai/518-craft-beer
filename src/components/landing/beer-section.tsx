@@ -99,7 +99,7 @@ export function BeerSection({ beer, flip, eventLabel, id }: BeerSectionProps) {
             <img
               src={beer.label_image_url}
               alt={`${beer.name} can`}
-              className="relative z-10 w-auto max-w-[320px] md:max-w-none md:max-h-[72vh]"
+              className="relative z-10 w-auto max-w-[260px] md:max-w-none md:max-h-[55vh]"
               style={{
                 filter: `drop-shadow(0 30px 80px ${beer.accent_color}55) drop-shadow(0 0 30px ${beer.accent_color}30)`,
               }}
@@ -145,7 +145,7 @@ export function BeerSection({ beer, flip, eventLabel, id }: BeerSectionProps) {
             {/* Beer name — two-tone */}
             <h2
               className="font-display uppercase leading-none mb-6"
-              style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}
+              style={{ fontSize: "clamp(2.5rem, 4.5vw, 4.5rem)" }}
             >
               {nameFirst && (
                 <span className="text-white">{nameFirst} </span>
@@ -187,7 +187,7 @@ export function BeerSection({ beer, flip, eventLabel, id }: BeerSectionProps) {
 }
 
 function CanPlaceholder({ beer }: { beer: BeerData }) {
-  const size = 300;
+  const size = 240;
   return (
     <div
       className="relative flex flex-col items-center justify-center text-center"
