@@ -119,7 +119,7 @@ export function FindSection({ id }: { id?: string }) {
                     {h.days}
                   </p>
                   <p
-                    className="text-sm tracking-[0.3em] uppercase"
+                    className="text-sm tracking-wide uppercase"
                     style={{ color: "rgba(245,229,192,0.68)" }}
                   >
                     {h.time}

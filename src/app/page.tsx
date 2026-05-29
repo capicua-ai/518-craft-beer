@@ -258,7 +258,7 @@ export default async function Home() {
                       {h.d}
                     </span>
                     <span
-                      className="text-sm tracking-[0.2em] uppercase"
+                      className="text-sm tracking-wide uppercase"
                       style={{ color: "rgba(245,229,192,0.65)" }}
                     >
                       {h.t}
