@@ -8,9 +8,10 @@ const COMMUNITY = [
   "Rotating Art Shows",
 ];
 
-export function StorySection() {
+export function StorySection({ id }: { id?: string }) {
   return (
     <section
+      id={id}
       aria-label="Our Story"
       className="relative py-24 md:py-32 px-8 md:px-16 lg:px-24 overflow-hidden"
       style={{
@@ -28,32 +29,22 @@ export function StorySection() {
         aria-hidden="true"
       />
 
-      {/* Vertical amber line — left edge */}
-      <div
-        className="absolute left-0 top-0 h-full w-px pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to bottom, transparent 0%, rgba(201,125,26,0.4) 30%, rgba(201,125,26,0.4) 70%, transparent 100%)",
-        }}
-        aria-hidden="true"
-      />
 
       <div className="relative z-10 max-w-5xl mx-auto">
         {/* Header */}
         <AnimateIn className="mb-16 md:mb-20">
           <p
-            className="text-xs tracking-[0.55em] uppercase mb-4"
+            className="text-sm tracking-[0.55em] uppercase mb-4"
             style={{ color: "rgba(201,125,26,1)" }}
           >
             Downtown Troy, NY &nbsp;&middot;&nbsp; The Trojan Renaissance
           </p>
           <h2
-            className="font-display uppercase leading-none text-white"
+            className="font-display uppercase leading-none"
             style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}
           >
-            A Corner
-            <br />
-            Clubhouse
+            <span className="text-white block">A Corner</span>
+            <span style={{ color: "var(--craft-cream)" }}>Clubhouse</span>
           </h2>
           <div
             className="w-10 h-px mt-6"
@@ -111,7 +102,7 @@ export function StorySection() {
                 to nurture here.&rdquo;
               </p>
               <cite
-                className="text-xs tracking-[0.35em] uppercase not-italic pl-5"
+                className="text-sm tracking-[0.35em] uppercase not-italic pl-5"
                 style={{ color: "rgba(201,125,26,1)" }}
               >
                 David Girard &nbsp;&middot;&nbsp; Manager
@@ -121,7 +112,7 @@ export function StorySection() {
             {/* Community events */}
             <div>
               <p
-                className="text-[11px] tracking-[0.55em] uppercase pb-4 mb-7"
+                className="text-xs tracking-[0.55em] uppercase pb-4 mb-7"
                 style={{
                   color: "rgba(201,125,26,1)",
                   borderBottom: "1px solid rgba(201,125,26,0.12)",
@@ -156,14 +147,14 @@ export function StorySection() {
             style={{ borderTop: "1px solid rgba(245,229,192,0.05)" }}
           >
             <p
-              className="text-[10px] tracking-[0.35em] uppercase"
+              className="text-xs tracking-[0.35em] uppercase"
               aria-hidden="true"
               style={{ color: "rgba(245,229,192,0.35)" }}
             >
               Founded by Jeremy Cowan
             </p>
             <p
-              className="text-[10px] tracking-[0.35em] uppercase"
+              className="text-xs tracking-[0.35em] uppercase"
               aria-hidden="true"
               style={{ color: "rgba(245,229,192,0.35)" }}
             >

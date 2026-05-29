@@ -1,6 +1,7 @@
 import { AgeGate } from "@/components/landing/age-gate";
 import { BeerSection } from "@/components/landing/beer-section";
 import { FindSection } from "@/components/landing/find-section";
+import { Navbar } from "@/components/landing/navbar";
 import { StorySection } from "@/components/landing/story-section";
 import { db } from "@/lib/db";
 
@@ -41,9 +42,14 @@ export default async function Home() {
 
   const s = settings ?? FALLBACK_SETTINGS;
 
+  const heroWords = s.hero_headline.trim().split(/\s+/);
+  const heroLastWord = heroWords[heroWords.length - 1] ?? "";
+  const heroOtherWords = heroWords.slice(0, -1);
+
   return (
     <>
       <AgeGate />
+      <Navbar />
 
       <main id="main-content">
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
@@ -74,33 +80,10 @@ export default async function Home() {
             }}
           />
 
-          {/* Vertical amber accent line — left edge */}
-          <div
-            className="absolute left-0 top-0 h-full w-px pointer-events-none"
-            style={{
-              background:
-                "linear-gradient(to bottom, transparent 0%, rgba(201,125,26,0.5) 30%, rgba(201,125,26,0.5) 70%, transparent 100%)",
-            }}
-            aria-hidden="true"
-          />
-
-          {/* Logo — top left */}
-          <div
-            className="absolute top-8 left-8 md:top-10 md:left-12 lg:left-16"
-            style={{ animation: "craft-rise 0.5s cubic-bezier(0.22,1,0.36,1) 0.1s both" }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/518logo.svg"
-              alt="518 Craft"
-              className="h-9 md:h-11 w-auto"
-            />
-          </div>
-
           {/* Headline — lower-third left */}
           <div className="absolute bottom-[12%] left-8 md:left-12 lg:left-16 max-w-2xl">
             <p
-              className="font-display text-xs tracking-[0.55em] uppercase mb-5"
+              className="font-display text-sm tracking-[0.55em] uppercase mb-5"
               style={{
                 color: "var(--craft-amber)",
                 animation: "craft-rise 0.6s cubic-bezier(0.22,1,0.36,1) 0.25s both",
@@ -109,32 +92,43 @@ export default async function Home() {
               518 &nbsp; CRAFT &nbsp;&middot;&nbsp; TROY, NY
             </p>
             <h1
-              className="font-display uppercase leading-none text-white"
+              className="font-display uppercase leading-none"
               style={{
                 fontSize: "clamp(3.5rem, 10vw, 9rem)",
                 animation: "craft-rise 0.8s cubic-bezier(0.22,1,0.36,1) 0.4s both",
               }}
             >
-              {s.hero_headline}
+              {heroOtherWords.map((word) => (
+                <span key={word} className="text-white block" style={{ lineHeight: 0.85 }}>{word}</span>
+              ))}
+              <span className="block" style={{ lineHeight: 0.85, color: "var(--craft-cream)" }}>{heroLastWord}</span>
             </h1>
-            <div
-              className="w-14 h-px my-5"
+            {s.hero_subheadline && (
+              <p
+                className="text-sm md:text-base leading-relaxed max-w-sm mb-2"
+                style={{
+                  color: "rgba(245,229,192,0.88)",
+                  animation: "craft-rise 0.6s cubic-bezier(0.22,1,0.36,1) 0.75s both",
+                }}
+              >
+                {s.hero_subheadline}
+              </p>
+            )}
+
+            {/* CTA */}
+            <a
+              href="#beers"
+              className="inline-flex items-center gap-2 mt-8 px-5 py-3 text-sm tracking-[0.3em] uppercase font-semibold transition-all duration-200 hover:brightness-110 active:scale-[0.97]"
               style={{
                 background: "var(--craft-amber)",
-                opacity: 0.55,
-                transformOrigin: "left",
-                animation: "craft-expand-x 0.5s cubic-bezier(0.22,1,0.36,1) 0.65s both",
-              }}
-            />
-            <p
-              className="text-sm md:text-base leading-relaxed max-w-sm"
-              style={{
-                color: "rgba(245,229,192,0.88)",
-                animation: "craft-rise 0.6s cubic-bezier(0.22,1,0.36,1) 0.75s both",
+                color: "#0A0500",
+                textDecoration: "none",
+                animation: "craft-rise 0.6s cubic-bezier(0.22,1,0.36,1) 0.9s both",
               }}
             >
-              {s.hero_subheadline}
-            </p>
+              <span aria-hidden="true">→</span>
+              Explore Our Beers
+            </a>
           </div>
 
           {/* Scroll hint — bottom right */}
@@ -159,7 +153,7 @@ export default async function Home() {
         </section>
 
         {/* ── Story ─────────────────────────────────────────────────────────── */}
-        <StorySection />
+        <StorySection id="story" />
 
         {/* ── Beer sections ─────────────────────────────────────────────────── */}
         {beers.map((beer, i) => (
@@ -168,23 +162,35 @@ export default async function Home() {
             beer={beer}
             flip={i % 2 !== 0}
             eventLabel={i === 0 ? "EVERY SAT · 9AM TO 2PM" : "EVERY FINAL FRIDAY"}
+            id={i === 0 ? "beers" : undefined}
           />
         ))}
 
         {/* ── Find Our Beer ─────────────────────────────────────────────────── */}
-        <FindSection />
+        <FindSection id="visit" />
 
         {/* ── Footer ───────────────────────────────────────────────────────── */}
         <footer
+          className="relative overflow-hidden"
           style={{
-            background: "#050200",
-            borderTop: "1px solid rgba(201,125,26,0.12)",
+            background: "#0C0400",
+            borderTop: "2px solid rgba(201,125,26,0.55)",
           }}
         >
+          {/* Ambient amber glow at the top */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse 80% 40% at 50% 0%, rgba(201,125,26,0.08) 0%, transparent 60%)",
+            }}
+            aria-hidden="true"
+          />
+
           {/* Brand mark */}
           <div
-            className="py-12 px-6 text-center flex justify-center"
-            style={{ borderBottom: "1px solid rgba(245,229,192,0.05)" }}
+            className="relative py-14 px-6 text-center flex justify-center"
+            style={{ borderBottom: "1px solid rgba(245,229,192,0.07)" }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -199,7 +205,7 @@ export default async function Home() {
             {/* Visit */}
             <div>
               <p
-                className="text-[11px] tracking-[0.55em] uppercase pb-4 mb-6"
+                className="text-xs tracking-[0.55em] uppercase pb-4 mb-6"
                 style={{
                   color: "rgba(201,125,26,1)",
                   borderBottom: "1px solid rgba(201,125,26,0.18)",
@@ -214,7 +220,7 @@ export default async function Home() {
                 200 Broadway
               </p>
               <p
-                className="text-xs tracking-[0.3em] uppercase mb-5"
+                className="text-sm tracking-[0.3em] uppercase mb-5"
                 style={{ color: "rgba(245,229,192,0.65)" }}
               >
                 Troy, NY 12180
@@ -233,7 +239,7 @@ export default async function Home() {
             {/* Hours */}
             <div>
               <p
-                className="text-[11px] tracking-[0.55em] uppercase pb-4 mb-6"
+                className="text-xs tracking-[0.55em] uppercase pb-4 mb-6"
                 style={{
                   color: "rgba(201,125,26,1)",
                   borderBottom: "1px solid rgba(201,125,26,0.18)",
@@ -248,11 +254,11 @@ export default async function Home() {
                   { d: "SUN", t: "4 – 10 PM" },
                 ].map((h) => (
                   <div key={h.d} className="flex items-baseline justify-between gap-4">
-                    <span className="text-xs tracking-[0.25em] uppercase text-white">
+                    <span className="text-sm tracking-[0.25em] uppercase text-white">
                       {h.d}
                     </span>
                     <span
-                      className="text-xs tracking-[0.2em] uppercase"
+                      className="text-sm tracking-[0.2em] uppercase"
                       style={{ color: "rgba(245,229,192,0.65)" }}
                     >
                       {h.t}
@@ -265,7 +271,7 @@ export default async function Home() {
             {/* Connect */}
             <div>
               <p
-                className="text-[11px] tracking-[0.55em] uppercase pb-4 mb-6"
+                className="text-xs tracking-[0.55em] uppercase pb-4 mb-6"
                 style={{
                   color: "rgba(201,125,26,1)",
                   borderBottom: "1px solid rgba(201,125,26,0.18)",
@@ -275,7 +281,7 @@ export default async function Home() {
               </p>
               <div className="space-y-3">
                 <p
-                  className="text-xs tracking-[0.3em] uppercase"
+                  className="text-sm tracking-[0.3em] uppercase"
                   style={{ color: "rgba(245,229,192,0.65)" }}
                 >
                   {s.footer_website}
@@ -284,13 +290,13 @@ export default async function Home() {
                   href="https://instagram.com/518craft"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-xs tracking-[0.3em] uppercase"
+                  className="block text-sm tracking-[0.3em] uppercase"
                   style={{ color: "rgba(245,229,192,0.65)", textDecoration: "none" }}
                 >
                   {s.footer_instagram}
                 </a>
                 <p
-                  className="text-xs tracking-[0.3em] uppercase"
+                  className="text-sm tracking-[0.3em] uppercase"
                   style={{ color: "rgba(245,229,192,0.65)" }}
                 >
                   hello@518craft.com

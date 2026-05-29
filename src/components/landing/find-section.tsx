@@ -6,9 +6,10 @@ const HOURS = [
   { days: "SUN", time: "4 PM – 10 PM" },
 ];
 
-export function FindSection() {
+export function FindSection({ id }: { id?: string }) {
   return (
     <section
+      id={id}
       aria-label="Visit Us"
       className="relative py-24 md:py-32 px-8 md:px-16 lg:px-24 overflow-hidden"
       style={{
@@ -26,21 +27,12 @@ export function FindSection() {
         aria-hidden="true"
       />
 
-      {/* Vertical amber line — left edge */}
-      <div
-        className="absolute left-0 top-0 h-full w-px pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to bottom, transparent 0%, rgba(201,125,26,0.4) 30%, rgba(201,125,26,0.4) 70%, transparent 100%)",
-        }}
-        aria-hidden="true"
-      />
 
       <div className="relative z-10 max-w-5xl mx-auto">
         {/* Header */}
         <AnimateIn className="mb-16 md:mb-20">
           <p
-            className="text-xs tracking-[0.55em] uppercase mb-4"
+            className="text-sm tracking-[0.55em] uppercase mb-4"
             style={{ color: "rgba(201,125,26,1)" }}
           >
             200 Broadway &nbsp;&middot;&nbsp; Troy, NY
@@ -49,7 +41,8 @@ export function FindSection() {
             className="font-display uppercase leading-none text-white"
             style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}
           >
-            Visit Us
+            Visit{" "}
+            <span style={{ color: "var(--craft-cream)" }}>Us</span>
           </h2>
           <div
             className="w-10 h-px mt-6"
@@ -68,7 +61,7 @@ export function FindSection() {
           {/* Address & vibe */}
           <AnimateIn delay={100}>
             <p
-              className="text-[11px] tracking-[0.55em] uppercase pb-4 mb-8"
+              className="text-xs tracking-[0.55em] uppercase pb-4 mb-8"
               style={{
                 color: "rgba(201,125,26,1)",
                 borderBottom: "1px solid rgba(201,125,26,0.18)",
@@ -83,7 +76,7 @@ export function FindSection() {
               518 Craft
             </p>
             <p
-              className="text-xs tracking-[0.35em] uppercase mb-4"
+              className="text-sm tracking-[0.35em] uppercase mb-4"
               style={{ color: "rgba(245,229,192,0.70)" }}
             >
               200 Broadway · Troy, NY 12180
@@ -108,7 +101,7 @@ export function FindSection() {
           {/* Hours */}
           <AnimateIn delay={220}>
             <p
-              className="text-[11px] tracking-[0.55em] uppercase pb-4 mb-8"
+              className="text-xs tracking-[0.55em] uppercase pb-4 mb-8"
               style={{
                 color: "rgba(201,125,26,1)",
                 borderBottom: "1px solid rgba(201,125,26,0.18)",
@@ -126,7 +119,7 @@ export function FindSection() {
                     {h.days}
                   </p>
                   <p
-                    className="text-xs tracking-[0.3em] uppercase"
+                    className="text-sm tracking-[0.3em] uppercase"
                     style={{ color: "rgba(245,229,192,0.68)" }}
                   >
                     {h.time}
@@ -143,14 +136,14 @@ export function FindSection() {
           style={{ borderTop: "1px solid rgba(245,229,192,0.05)" }}
         >
           <p
-            className="text-[10px] tracking-[0.35em] uppercase"
+            className="text-xs tracking-[0.35em] uppercase"
             aria-hidden="true"
             style={{ color: "rgba(245,229,192,0.30)" }}
           >
             Troy Night Out &nbsp;&middot;&nbsp; Jazz &amp; Jam &nbsp;&middot;&nbsp; Open Mic
           </p>
           <p
-            className="text-xs tracking-[0.35em] uppercase"
+            className="text-sm tracking-[0.35em] uppercase"
             style={{ color: "rgba(245,229,192,0.65)" }}
           >
             hello@518craft.com

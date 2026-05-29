@@ -14,7 +14,7 @@ async function main() {
     where: { id: "00000000-0000-0000-0000-000000000001" },
     create: {
       id: "00000000-0000-0000-0000-000000000001",
-      hero_headline: "TWO NEW BEERS",
+      hero_headline: "POUR THE NIGHT",
       hero_subheadline:
         "Every drink tells a story. An alliance of artists dedicated to the Trojan Renaissance.",
       footer_address: "200 Broadway, Troy, NY",
