@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const COOKIE_NAME = "age_verified";
 const COOKIE_DAYS = 30;
@@ -22,12 +22,57 @@ function setCookie(name: string, value: string, days: number) {
 export function AgeGate() {
   const [visible, setVisible] = useState(false);
   const [denied, setDenied] = useState(false);
+  const yesRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (getCookie(COOKIE_NAME) !== "1") {
       setVisible(true);
     }
   }, []);
+
+  // Lock body scroll and move focus when modal opens
+  useEffect(() => {
+    if (!visible) return;
+    document.body.style.overflow = "hidden";
+    yesRef.current?.focus();
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [visible]);
+
+  // Focus trap — keep Tab/Shift+Tab inside the dialog
+  useEffect(() => {
+    if (!visible) return;
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key !== "Tab") return;
+      const focusable = Array.from(
+        dialog!.querySelectorAll<HTMLElement>(
+          'button, a, input, [tabindex]:not([tabindex="-1"])'
+        )
+      ).filter((el) => !el.hasAttribute("disabled"));
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [visible]);
 
   if (!visible) return null;
 
@@ -46,6 +91,7 @@ export function AgeGate() {
       role="dialog"
       aria-modal="true"
       aria-label="Age verification"
+      ref={dialogRef}
     >
       <div
         className="absolute inset-0"
@@ -88,7 +134,9 @@ export function AgeGate() {
 
             <div className="flex gap-3 w-full">
               <button
+                ref={yesRef}
                 onClick={handleYes}
+                aria-label="Yes, I am 21 or older"
                 className="flex-1 py-4 font-display text-2xl uppercase tracking-widest transition-all duration-150 hover:brightness-110 active:scale-[0.97] cursor-pointer"
                 style={{
                   background: "var(--craft-amber)",
@@ -99,6 +147,7 @@ export function AgeGate() {
               </button>
               <button
                 onClick={handleNo}
+                aria-label="No, I am under 21"
                 className="flex-1 py-4 font-display text-2xl uppercase tracking-widest border transition-all duration-150 hover:bg-white/5 active:scale-[0.97] cursor-pointer"
                 style={{
                   borderColor: "rgba(245,229,192,0.2)",
@@ -121,9 +170,18 @@ export function AgeGate() {
               className="text-sm leading-relaxed"
               style={{ color: "rgba(245,229,192,0.5)" }}
             >
-              You must be 21 or older to visit this site. Please come back when
-              you&apos;re of legal drinking age.
+              You must be 21 or older to visit this site.
             </p>
+            <a
+              href="https://www.responsibility.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs tracking-[0.3em] uppercase mt-4 underline underline-offset-4"
+              style={{ color: "rgba(245,229,192,0.4)" }}
+              aria-label="Learn about responsible drinking at responsibility.org (opens in new tab)"
+            >
+              responsibility.org
+            </a>
           </div>
         )}
       </div>

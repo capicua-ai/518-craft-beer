@@ -24,6 +24,7 @@ export default async function Home() {
     size_oz: number;
     description: string;
     label_image_url: string | null;
+    flavor_tags: string[];
     accent_color: string;
     bg_color: string;
     display_order: number;
@@ -44,16 +45,17 @@ export default async function Home() {
     <>
       <AgeGate />
 
-      <main>
+      <main id="main-content">
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
-        <section className="relative min-h-screen overflow-hidden">
+        <section aria-label="Hero" className="relative min-h-screen overflow-hidden">
           {/* Full-bleed background photo */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/hero-v4.png"
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover object-center"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ objectPosition: "62% center" }}
           />
 
           {/* Gradient overlays — heavy left/bottom for text legibility */}
@@ -72,6 +74,16 @@ export default async function Home() {
             }}
           />
 
+          {/* Vertical amber accent line — left edge */}
+          <div
+            className="absolute left-0 top-0 h-full w-px pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(to bottom, transparent 0%, rgba(201,125,26,0.5) 30%, rgba(201,125,26,0.5) 70%, transparent 100%)",
+            }}
+            aria-hidden="true"
+          />
+
           {/* Logo — top left */}
           <div
             className="absolute top-8 left-8 md:top-10 md:left-12 lg:left-16"
@@ -85,10 +97,10 @@ export default async function Home() {
             />
           </div>
 
-          {/* Headline — bottom left */}
-          <div className="absolute bottom-14 left-8 md:left-12 lg:left-16 max-w-2xl">
+          {/* Headline — lower-third left */}
+          <div className="absolute bottom-[12%] left-8 md:left-12 lg:left-16 max-w-2xl">
             <p
-              className="font-display text-[10px] tracking-[0.55em] uppercase mb-5"
+              className="font-display text-xs tracking-[0.55em] uppercase mb-5"
               style={{
                 color: "var(--craft-amber)",
                 animation: "craft-rise 0.6s cubic-bezier(0.22,1,0.36,1) 0.25s both",
@@ -117,7 +129,7 @@ export default async function Home() {
             <p
               className="text-sm md:text-base leading-relaxed max-w-sm"
               style={{
-                color: "rgba(245,229,192,0.55)",
+                color: "rgba(245,229,192,0.88)",
                 animation: "craft-rise 0.6s cubic-bezier(0.22,1,0.36,1) 0.75s both",
               }}
             >
@@ -146,6 +158,9 @@ export default async function Home() {
           </div>
         </section>
 
+        {/* ── Story ─────────────────────────────────────────────────────────── */}
+        <StorySection />
+
         {/* ── Beer sections ─────────────────────────────────────────────────── */}
         {beers.map((beer, i) => (
           <BeerSection
@@ -156,9 +171,6 @@ export default async function Home() {
           />
         ))}
 
-        {/* ── Story ─────────────────────────────────────────────────────────── */}
-        <StorySection />
-
         {/* ── Find Our Beer ─────────────────────────────────────────────────── */}
         <FindSection />
 
@@ -166,20 +178,20 @@ export default async function Home() {
         <footer
           style={{
             background: "#050200",
-            borderTop: "1px solid rgba(245,229,192,0.05)",
+            borderTop: "1px solid rgba(201,125,26,0.12)",
           }}
         >
           {/* Brand mark */}
           <div
-            className="py-12 px-6 text-center"
+            className="py-12 px-6 text-center flex justify-center"
             style={{ borderBottom: "1px solid rgba(245,229,192,0.05)" }}
           >
-            <p
-              className="font-display text-2xl tracking-[0.55em] uppercase"
-              style={{ color: "var(--craft-amber)" }}
-            >
-              518 &nbsp; CRAFT
-            </p>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/518logo.svg"
+              alt="518 Craft"
+              className="h-14 w-auto opacity-90"
+            />
           </div>
 
           {/* Three-column grid */}
@@ -187,10 +199,10 @@ export default async function Home() {
             {/* Visit */}
             <div>
               <p
-                className="text-[9px] tracking-[0.55em] uppercase pb-4 mb-6"
+                className="text-[11px] tracking-[0.55em] uppercase pb-4 mb-6"
                 style={{
-                  color: "rgba(201,125,26,0.45)",
-                  borderBottom: "1px solid rgba(201,125,26,0.12)",
+                  color: "rgba(201,125,26,1)",
+                  borderBottom: "1px solid rgba(201,125,26,0.18)",
                 }}
               >
                 Visit
@@ -202,8 +214,8 @@ export default async function Home() {
                 200 Broadway
               </p>
               <p
-                className="text-[10px] tracking-[0.3em] uppercase mb-5"
-                style={{ color: "rgba(245,229,192,0.25)" }}
+                className="text-xs tracking-[0.3em] uppercase mb-5"
+                style={{ color: "rgba(245,229,192,0.65)" }}
               >
                 Troy, NY 12180
               </p>
@@ -211,39 +223,37 @@ export default async function Home() {
                 href="https://maps.google.com/?q=200+Broadway+Troy+NY+12180"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[10px] tracking-[0.3em] uppercase"
-                style={{ color: "rgba(201,125,26,0.55)", textDecoration: "none" }}
+                className="text-sm tracking-[0.25em] uppercase inline-block py-2"
+                style={{ color: "var(--craft-amber)", textDecoration: "none" }}
               >
-                ↗ Get Directions
+                <span aria-hidden="true">↗ </span>Get Directions
               </a>
             </div>
 
             {/* Hours */}
             <div>
               <p
-                className="text-[9px] tracking-[0.55em] uppercase pb-4 mb-6"
+                className="text-[11px] tracking-[0.55em] uppercase pb-4 mb-6"
                 style={{
-                  color: "rgba(201,125,26,0.45)",
-                  borderBottom: "1px solid rgba(201,125,26,0.12)",
+                  color: "rgba(201,125,26,1)",
+                  borderBottom: "1px solid rgba(201,125,26,0.18)",
                 }}
               >
                 Hours
               </p>
-              <div className="space-y-2.5">
+              <div className="space-y-3">
                 {[
                   { d: "MON – THU", t: "4 – 11 PM" },
                   { d: "FRI – SAT", t: "4 PM – MIDNIGHT" },
                   { d: "SUN", t: "4 – 10 PM" },
                 ].map((h) => (
                   <div key={h.d} className="flex items-baseline justify-between gap-4">
-                    <span
-                      className="text-[10px] tracking-[0.25em] uppercase text-white"
-                    >
+                    <span className="text-xs tracking-[0.25em] uppercase text-white">
                       {h.d}
                     </span>
                     <span
-                      className="text-[10px] tracking-[0.2em] uppercase"
-                      style={{ color: "rgba(245,229,192,0.25)" }}
+                      className="text-xs tracking-[0.2em] uppercase"
+                      style={{ color: "rgba(245,229,192,0.65)" }}
                     >
                       {h.t}
                     </span>
@@ -255,18 +265,18 @@ export default async function Home() {
             {/* Connect */}
             <div>
               <p
-                className="text-[9px] tracking-[0.55em] uppercase pb-4 mb-6"
+                className="text-[11px] tracking-[0.55em] uppercase pb-4 mb-6"
                 style={{
-                  color: "rgba(201,125,26,0.45)",
-                  borderBottom: "1px solid rgba(201,125,26,0.12)",
+                  color: "rgba(201,125,26,1)",
+                  borderBottom: "1px solid rgba(201,125,26,0.18)",
                 }}
               >
                 Connect
               </p>
               <div className="space-y-3">
                 <p
-                  className="text-[10px] tracking-[0.3em] uppercase"
-                  style={{ color: "rgba(245,229,192,0.25)" }}
+                  className="text-xs tracking-[0.3em] uppercase"
+                  style={{ color: "rgba(245,229,192,0.65)" }}
                 >
                   {s.footer_website}
                 </p>
@@ -274,14 +284,14 @@ export default async function Home() {
                   href="https://instagram.com/518craft"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-[10px] tracking-[0.3em] uppercase"
-                  style={{ color: "rgba(245,229,192,0.25)", textDecoration: "none" }}
+                  className="block text-xs tracking-[0.3em] uppercase"
+                  style={{ color: "rgba(245,229,192,0.65)", textDecoration: "none" }}
                 >
                   {s.footer_instagram}
                 </a>
                 <p
-                  className="text-[10px] tracking-[0.3em] uppercase"
-                  style={{ color: "rgba(245,229,192,0.25)" }}
+                  className="text-xs tracking-[0.3em] uppercase"
+                  style={{ color: "rgba(245,229,192,0.65)" }}
                 >
                   hello@518craft.com
                 </p>
@@ -296,7 +306,8 @@ export default async function Home() {
           >
             <p
               className="font-display text-sm tracking-[0.4em] uppercase py-8"
-              style={{ color: "rgba(245,229,192,0.12)" }}
+              aria-hidden="true"
+              style={{ color: "rgba(245,229,192,0.35)" }}
             >
               Think NY &nbsp;&middot;&nbsp; Drink NY
             </p>

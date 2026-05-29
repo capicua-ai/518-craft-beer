@@ -39,11 +39,15 @@ async function main() {
       description:
         "Throughout the year, local growers and makers gather in Troy, NY to sell their goods at the Downtown Troy Farmers Market bringing thousands of visitors with totes in their hands and community in their hearts. Drink up!",
       label_image_url: "/FM-can.png",
+      flavor_tags: ["Crisp", "Light", "Refreshing"],
       accent_color: "#C97D1A",
       bg_color: "#1C0800",
       display_order: 1,
     },
-    update: { label_image_url: "/FM-can.png" },
+    update: {
+      label_image_url: "/FM-can.png",
+      flavor_tags: ["Crisp", "Light", "Refreshing"],
+    },
   });
 
   // Beer 2 — Troy Night Out
@@ -58,11 +62,15 @@ async function main() {
       description:
         "Each final Friday of the month, as the evening creeps over the Collar City, a rush of live music, excitement and friendship pours through the streets downtown. That's where TNO Hazy IPA made its first appearance so that now you can enjoy it any night, any where!",
       label_image_url: "/TNO-can.png",
+      flavor_tags: ["Juicy", "Tropical", "Hazy"],
       accent_color: "#FF7B00",
       bg_color: "#0D0020",
       display_order: 2,
     },
-    update: { label_image_url: "/TNO-can.png" },
+    update: {
+      label_image_url: "/TNO-can.png",
+      flavor_tags: ["Juicy", "Tropical", "Hazy"],
+    },
   });
 
   console.log("Seed complete.");

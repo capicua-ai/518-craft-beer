@@ -14,6 +14,13 @@ export function AnimateIn({ children, className = "", delay = 0 }: Props) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    // Respect user's motion preference — reveal immediately if reduced motion
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.classList.add("is-visible");
+      return;
+    }
+
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

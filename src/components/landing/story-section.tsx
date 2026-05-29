@@ -11,10 +11,11 @@ const COMMUNITY = [
 export function StorySection() {
   return (
     <section
+      aria-label="Our Story"
       className="relative py-24 md:py-32 px-8 md:px-16 lg:px-24 overflow-hidden"
       style={{
-        background: "#050200",
-        borderTop: "1px solid rgba(245,229,192,0.05)",
+        background: "#1E0A00",
+        borderTop: "1px solid rgba(201,125,26,0.12)",
       }}
     >
       {/* Ambient center glow */}
@@ -41,8 +42,8 @@ export function StorySection() {
         {/* Header */}
         <AnimateIn className="mb-16 md:mb-20">
           <p
-            className="text-[10px] tracking-[0.55em] uppercase mb-4"
-            style={{ color: "rgba(201,125,26,0.55)" }}
+            className="text-xs tracking-[0.55em] uppercase mb-4"
+            style={{ color: "rgba(201,125,26,1)" }}
           >
             Downtown Troy, NY &nbsp;&middot;&nbsp; The Trojan Renaissance
           </p>
@@ -56,7 +57,7 @@ export function StorySection() {
           </h2>
           <div
             className="w-10 h-px mt-6"
-            style={{ background: "#C97D1A", opacity: 0.4 }}
+            style={{ background: "var(--craft-amber)", opacity: 0.4 }}
           />
         </AnimateIn>
 
@@ -66,7 +67,7 @@ export function StorySection() {
           <AnimateIn delay={100}>
             <p
               className="font-editorial italic text-base md:text-lg leading-relaxed mb-7"
-              style={{ color: "rgba(245,229,192,0.58)" }}
+              style={{ color: "rgba(245,229,192,0.85)" }}
             >
               At 518 Craft, we are a unique blend of craft beer, ciders, spirits,
               and specialty cocktails. Our commitment to storytelling sets us apart
@@ -74,8 +75,8 @@ export function StorySection() {
               intricate flavors.
             </p>
             <p
-              className="text-sm leading-relaxed mb-7"
-              style={{ color: "rgba(245,229,192,0.32)" }}
+              className="text-base leading-relaxed mb-7"
+              style={{ color: "rgba(245,229,192,0.75)" }}
             >
               518 Craft is a haven for musicians, artists, creatives, and
               beer-lovers alike. The walls are home to rotating art shows. Its
@@ -84,8 +85,8 @@ export function StorySection() {
               adapting to fit the interests of their niche, beer-loving community.
             </p>
             <p
-              className="text-sm leading-relaxed"
-              style={{ color: "rgba(245,229,192,0.32)" }}
+              className="text-base leading-relaxed"
+              style={{ color: "rgba(245,229,192,0.75)" }}
             >
               Founded by Jeremy Cowan, 518 Craft now enters an exciting new
               chapter with the addition of David Girard, Shannon Rafferty, and
@@ -101,7 +102,7 @@ export function StorySection() {
               <p
                 className="font-editorial italic text-base md:text-lg leading-relaxed mb-4 pl-5"
                 style={{
-                  color: "rgba(245,229,192,0.5)",
+                  color: "rgba(245,229,192,0.75)",
                   borderLeft: "2px solid rgba(201,125,26,0.4)",
                 }}
               >
@@ -110,8 +111,8 @@ export function StorySection() {
                 to nurture here.&rdquo;
               </p>
               <cite
-                className="text-[10px] tracking-[0.35em] uppercase not-italic pl-5"
-                style={{ color: "rgba(201,125,26,0.55)" }}
+                className="text-xs tracking-[0.35em] uppercase not-italic pl-5"
+                style={{ color: "rgba(201,125,26,1)" }}
               >
                 David Girard &nbsp;&middot;&nbsp; Manager
               </cite>
@@ -120,9 +121,9 @@ export function StorySection() {
             {/* Community events */}
             <div>
               <p
-                className="text-[9px] tracking-[0.55em] uppercase pb-4 mb-7"
+                className="text-[11px] tracking-[0.55em] uppercase pb-4 mb-7"
                 style={{
-                  color: "rgba(201,125,26,0.45)",
+                  color: "rgba(201,125,26,1)",
                   borderBottom: "1px solid rgba(201,125,26,0.12)",
                 }}
               >
@@ -156,13 +157,15 @@ export function StorySection() {
           >
             <p
               className="text-[10px] tracking-[0.35em] uppercase"
-              style={{ color: "rgba(245,229,192,0.18)" }}
+              aria-hidden="true"
+              style={{ color: "rgba(245,229,192,0.35)" }}
             >
               Founded by Jeremy Cowan
             </p>
             <p
               className="text-[10px] tracking-[0.35em] uppercase"
-              style={{ color: "rgba(245,229,192,0.18)" }}
+              aria-hidden="true"
+              style={{ color: "rgba(245,229,192,0.35)" }}
             >
               An alliance of artists dedicated to the Trojan Renaissance
             </p>

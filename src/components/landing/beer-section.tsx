@@ -8,6 +8,7 @@ interface BeerData {
   size_oz: number;
   description: string;
   label_image_url: string | null;
+  flavor_tags: string[];
   accent_color: string;
   bg_color: string;
 }
@@ -23,6 +24,7 @@ export function BeerSection({ beer, flip, eventLabel }: BeerSectionProps) {
 
   return (
     <section
+      aria-label={`${beer.name} – ${beer.style}`}
       className="relative min-h-screen flex items-stretch overflow-hidden"
       style={{
         background: `linear-gradient(155deg, ${beer.bg_color} 0%, #050200 60%)`,
@@ -125,11 +127,30 @@ export function BeerSection({ beer, flip, eventLabel }: BeerSectionProps) {
           >
             {/* Style / specs */}
             <p
-              className="text-[11px] tracking-[0.4em] uppercase mb-6"
+              className="text-xs tracking-[0.4em] uppercase mb-4"
               style={{ color: beer.accent_color }}
             >
               {beer.style} &middot; {beer.abv} ABV &middot; {beer.size_oz} FL OZ
             </p>
+
+            {/* Flavor tags */}
+            {beer.flavor_tags.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-7">
+                {beer.flavor_tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-xs tracking-[0.3em] uppercase px-3 py-1"
+                    style={{
+                      color: beer.accent_color,
+                      background: `${beer.accent_color}14`,
+                      border: `1px solid ${beer.accent_color}35`,
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
 
             {/* Beer name */}
             <h2
@@ -153,7 +174,7 @@ export function BeerSection({ beer, flip, eventLabel }: BeerSectionProps) {
             {/* Description */}
             <p
               className="font-editorial italic text-base md:text-lg leading-relaxed max-w-md"
-              style={{ color: "rgba(245,229,192,0.62)" }}
+              style={{ color: "rgba(245,229,192,0.82)" }}
             >
               {beer.description}
             </p>
@@ -163,17 +184,17 @@ export function BeerSection({ beer, flip, eventLabel }: BeerSectionProps) {
               className={`mt-10 flex flex-wrap items-center gap-4 ${flip ? "md:justify-end" : ""}`}
             >
               <span
-                className="text-[10px] tracking-[0.3em] uppercase border px-3 py-1.5"
+                className="text-sm tracking-[0.25em] uppercase border px-4 py-2"
                 style={{
-                  borderColor: `${beer.accent_color}45`,
-                  color: `${beer.accent_color}85`,
+                  borderColor: beer.accent_color,
+                  color: beer.accent_color,
                 }}
               >
                 Independent Craft
               </span>
               <span
-                className="text-[10px] tracking-[0.3em] uppercase"
-                style={{ color: "rgba(245,229,192,0.2)" }}
+                className="text-xs tracking-[0.3em] uppercase"
+                style={{ color: "rgba(245,229,192,0.50)" }}
               >
                 Think NY &middot; Drink NY
               </span>

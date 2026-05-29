@@ -46,6 +46,7 @@ model Beer {
   label_image_url String?
   accent_color    String   @default("#C97D1A")
   bg_color        String   @default("#1A0800")
+  flavor_tags     String[] @default([])
   display_order   Int      @default(0)
   created_at      DateTime @default(now())
   updated_at      DateTime @updatedAt

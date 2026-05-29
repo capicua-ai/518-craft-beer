@@ -9,10 +9,11 @@ const HOURS = [
 export function FindSection() {
   return (
     <section
+      aria-label="Visit Us"
       className="relative py-24 md:py-32 px-8 md:px-16 lg:px-24 overflow-hidden"
       style={{
-        background: "#050200",
-        borderTop: "1px solid rgba(245,229,192,0.05)",
+        background: "#07060F",
+        borderTop: "1px solid rgba(201,125,26,0.12)",
       }}
     >
       {/* Ambient top glow */}
@@ -39,8 +40,8 @@ export function FindSection() {
         {/* Header */}
         <AnimateIn className="mb-16 md:mb-20">
           <p
-            className="text-[10px] tracking-[0.55em] uppercase mb-4"
-            style={{ color: "rgba(201,125,26,0.55)" }}
+            className="text-xs tracking-[0.55em] uppercase mb-4"
+            style={{ color: "rgba(201,125,26,1)" }}
           >
             200 Broadway &nbsp;&middot;&nbsp; Troy, NY
           </p>
@@ -52,11 +53,11 @@ export function FindSection() {
           </h2>
           <div
             className="w-10 h-px mt-6"
-            style={{ background: "#C97D1A", opacity: 0.4 }}
+            style={{ background: "var(--craft-amber)", opacity: 0.4 }}
           />
           <p
             className="font-editorial italic mt-6 max-w-sm text-base md:text-lg leading-relaxed"
-            style={{ color: "rgba(245,229,192,0.4)" }}
+            style={{ color: "rgba(245,229,192,0.72)" }}
           >
             A haven for musicians, artists, creatives, and beer-lovers. Every drink tells a story.
           </p>
@@ -67,10 +68,10 @@ export function FindSection() {
           {/* Address & vibe */}
           <AnimateIn delay={100}>
             <p
-              className="text-[9px] tracking-[0.55em] uppercase pb-4 mb-8"
+              className="text-[11px] tracking-[0.55em] uppercase pb-4 mb-8"
               style={{
-                color: "rgba(201,125,26,0.45)",
-                borderBottom: "1px solid rgba(201,125,26,0.12)",
+                color: "rgba(201,125,26,1)",
+                borderBottom: "1px solid rgba(201,125,26,0.18)",
               }}
             >
               The Bar
@@ -82,8 +83,8 @@ export function FindSection() {
               518 Craft
             </p>
             <p
-              className="text-[10px] tracking-[0.35em] uppercase mb-4"
-              style={{ color: "rgba(245,229,192,0.22)" }}
+              className="text-xs tracking-[0.35em] uppercase mb-4"
+              style={{ color: "rgba(245,229,192,0.70)" }}
             >
               200 Broadway · Troy, NY 12180
             </p>
@@ -91,14 +92,14 @@ export function FindSection() {
               href="https://maps.google.com/?q=200+Broadway+Troy+NY+12180"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[10px] tracking-[0.35em] uppercase mb-8 inline-block"
-              style={{ color: "rgba(201,125,26,0.6)", textDecoration: "none" }}
+              className="text-sm tracking-[0.25em] uppercase inline-block py-2 mb-6"
+              style={{ color: "var(--craft-amber)", textDecoration: "none" }}
             >
-              ↗ Get Directions
+              <span aria-hidden="true">↗ </span>Get Directions
             </a>
             <p
-              className="font-editorial italic text-sm leading-relaxed max-w-xs"
-              style={{ color: "rgba(245,229,192,0.35)" }}
+              className="font-editorial italic text-base leading-relaxed max-w-xs"
+              style={{ color: "rgba(245,229,192,0.68)" }}
             >
               An alliance of artists dedicated to the Trojan Renaissance. Rotating art shows, live music, and Troy&rsquo;s finest craft beer.
             </p>
@@ -107,10 +108,10 @@ export function FindSection() {
           {/* Hours */}
           <AnimateIn delay={220}>
             <p
-              className="text-[9px] tracking-[0.55em] uppercase pb-4 mb-8"
+              className="text-[11px] tracking-[0.55em] uppercase pb-4 mb-8"
               style={{
-                color: "rgba(201,125,26,0.45)",
-                borderBottom: "1px solid rgba(201,125,26,0.12)",
+                color: "rgba(201,125,26,1)",
+                borderBottom: "1px solid rgba(201,125,26,0.18)",
               }}
             >
               Hours
@@ -125,8 +126,8 @@ export function FindSection() {
                     {h.days}
                   </p>
                   <p
-                    className="text-[10px] tracking-[0.3em] uppercase"
-                    style={{ color: "rgba(245,229,192,0.35)" }}
+                    className="text-xs tracking-[0.3em] uppercase"
+                    style={{ color: "rgba(245,229,192,0.68)" }}
                   >
                     {h.time}
                   </p>
@@ -143,13 +144,14 @@ export function FindSection() {
         >
           <p
             className="text-[10px] tracking-[0.35em] uppercase"
-            style={{ color: "rgba(245,229,192,0.18)" }}
+            aria-hidden="true"
+            style={{ color: "rgba(245,229,192,0.30)" }}
           >
             Troy Night Out &nbsp;&middot;&nbsp; Jazz &amp; Jam &nbsp;&middot;&nbsp; Open Mic
           </p>
           <p
-            className="text-[10px] tracking-[0.35em] uppercase"
-            style={{ color: "rgba(245,229,192,0.18)" }}
+            className="text-xs tracking-[0.35em] uppercase"
+            style={{ color: "rgba(245,229,192,0.65)" }}
           >
             hello@518craft.com
           </p>

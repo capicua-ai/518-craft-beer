@@ -19,10 +19,30 @@ const lora = Lora({
   style: ["normal", "italic"],
 });
 
+const BASE_URL = "https://518craft.com";
+const TITLE = "518 Craft Beer — Two New Beers from Troy, NY";
+const DESCRIPTION =
+  "Farmers Market After Party Pilsner and Troy Night Out Hazy IPA. Craft beer born in Troy, NY. Every drink tells a story. Think NY, Drink NY.";
+
 export const metadata: Metadata = {
-  title: "518 Craft Beer — Two New Beers from Troy, NY",
-  description:
-    "Farmers Market After Party Pilsner and Troy Night Out Hazy IPA. Brewed and canned in Elmsford, NY. Think NY, Drink NY.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: BASE_URL },
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: BASE_URL,
+    siteName: "518 Craft Beer",
+    images: [{ url: `${BASE_URL}/hero-v4.png`, width: 1717, height: 916 }],
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [`${BASE_URL}/hero-v4.png`],
+  },
 };
 
 export default function RootLayout({
@@ -40,6 +60,15 @@ export default function RootLayout({
         className="flex min-h-full flex-col"
         style={{ background: "var(--craft-bg)", color: "var(--craft-cream)" }}
       >
+        {/* Skip to main content — keyboard / screen reader navigation */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[10000] focus:px-4 focus:py-2 focus:text-sm focus:font-display focus:tracking-widest focus:uppercase"
+          style={{ background: "var(--craft-amber)", color: "#0A0500" }}
+        >
+          Skip to content
+        </a>
+
         {/* Paper grain — editorial atmosphere at ~4% opacity */}
         <div
           className="fixed inset-0 -z-10 pointer-events-none"
